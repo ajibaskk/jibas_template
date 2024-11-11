@@ -8,7 +8,7 @@ import (
 )
 
 type UserHandlerInterface interface {
-	RegisterRoutes(router *gin.Engine)
+	RegisterRoutes(router *gin.RouterGroup)
 }
 
 type UserHandler struct {
@@ -19,7 +19,7 @@ func NewUserHandler(userUsecase domain.UserUsecase) UserHandlerInterface {
 	return &UserHandler{userUsecase}
 }
 
-func (h *UserHandler) RegisterRoutes(router *gin.Engine) {
+func (h *UserHandler) RegisterRoutes(router *gin.RouterGroup) {
 	router.GET("/users", h.GetAllUsers)
 	router.POST("/users", h.CreateUser)
 }
