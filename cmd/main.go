@@ -5,12 +5,27 @@ import (
 	"jibas-template/internal/di"
 	"jibas-template/internal/domain"
 	"jibas-template/middleware"
+	"jibas-template/pkg/swagger"
 	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
+// @title MyApp API
+// @version 1.0
+// @description This is the API documentation for MyApp.
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8080
+// @BasePath /
 func main() {
 	// Load environment variables from .env file if it exists
 	err := godotenv.Load(".env")
@@ -31,6 +46,9 @@ func main() {
 
 	// Initialize Gin router
 	router := gin.Default()
+
+	// Set up Swagger documentation route
+	swagger.SetupSwagger(router)
 
 	// Create an internal route group with JWT middleware
 	internal := router.Group("/api")
